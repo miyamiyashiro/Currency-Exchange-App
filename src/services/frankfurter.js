@@ -1,3 +1,4 @@
+import { normalizeHistory } from '../utils/history.js'
 const API_URL = 'https://api.frankfurter.dev/v2'
 
 export async function fetchResource(path, signal) {
@@ -12,6 +13,13 @@ export async function fetchResource(path, signal) {
     if (!Array.isArray(data)) throw new Error('A lista de moedas recebida é inválida.')
     return data.filter(currency => /^[A-Z]{3}$/.test(currency.iso_code) && typeof currency.name === 'string')
       .sort((a, b) => a.iso_code.localeCompare(b.iso_code))
+  }
+  if (path.startsWith('/rates?')) {
+    const params = new URLSearchParams(path.split('?')[1])
+    return normalizeHistory(data, {
+      base: params.get('base'), quote: params.get('quotes'),
+      from: params.get('from'), to: params.get('to'),
+    })
   }
   const [, , base, quote] = path.split('/')
   if (!data || data.base !== base || data.quote !== quote ||
