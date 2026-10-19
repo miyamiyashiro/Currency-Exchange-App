@@ -1,0 +1,180 @@
+{
+  "info": {
+    "_postman_id": "fa36d70b-f7bb-45c9-916c-ac089f793450",
+    "name": "Currency Exchange App",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "59046006",
+    "_collection_link": "https://go.postman.co/collection/59046006-fa36d70b-f7bb-45c9-916c-ac089f793450?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Moedas disponíveis",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.frankfurter.dev/v2/currencies",
+          "protocol": "https",
+          "host": [
+            "api",
+            "frankfurter",
+            "dev"
+          ],
+          "path": [
+            "v2",
+            "currencies"
+          ]
+        },
+        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+      },
+      "response": []
+    },
+    {
+      "name": "Cotação EUR para USD",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.frankfurter.dev/v2/rate/EUR/USD",
+          "protocol": "https",
+          "host": [
+            "api",
+            "frankfurter",
+            "dev"
+          ],
+          "path": [
+            "v2",
+            "rate",
+            "EUR",
+            "USD"
+          ]
+        },
+        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+      },
+      "response": []
+    },
+    {
+      "name": "Histórico EUR para USD",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.frankfurter.dev/v2/rates?from=2024-05-01&to=2024-05-31&base=EUR&quotes=USD",
+          "protocol": "https",
+          "host": [
+            "api",
+            "frankfurter",
+            "dev"
+          ],
+          "path": [
+            "v2",
+            "rates"
+          ],
+          "query": [
+            {
+              "key": "from",
+              "value": "2024-05-01"
+            },
+            {
+              "key": "to",
+              "value": "2024-05-31"
+            },
+            {
+              "key": "base",
+              "value": "EUR"
+            },
+            {
+              "key": "quotes",
+              "value": "USD"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Erro — moeda inválida",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.frankfurter.dev/v2/rate/INVALID/USD",
+          "protocol": "https",
+          "host": [
+            "api",
+            "frankfurter",
+            "dev"
+          ],
+          "path": [
+            "v2",
+            "rate",
+            "INVALID",
+            "USD"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Histórico — fim de semana",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.frankfurter.dev/v2/rates?from=2024-05-04&to=2024-05-05&base=EUR&quotes=USD",
+          "protocol": "https",
+          "host": [
+            "api",
+            "frankfurter",
+            "dev"
+          ],
+          "path": [
+            "v2",
+            "rates"
+          ],
+          "query": [
+            {
+              "key": "from",
+              "value": "2024-05-04"
+            },
+            {
+              "key": "to",
+              "value": "2024-05-05"
+            },
+            {
+              "key": "base",
+              "value": "EUR"
+            },
+            {
+              "key": "quotes",
+              "value": "USD"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
