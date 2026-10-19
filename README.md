@@ -15,8 +15,8 @@ npm run lint
 
 ## Etapa atual
 Interface estática inspirada no Figma, com CSS Modules e layout adaptado ao celular.
-Conversor e tabela usam valores fictícios identificados na tela. Os controles estão desabilitados.
-API, gráfico, filtros e CSV serão implementados incrementalmente.
+O conversor consulta moedas e taxas reais, valida valores e permite inverter o par. Histórico e tabela ainda são demonstrativos.
+Gráfico, filtros e CSV serão implementados nas próximas etapas. Testes: node --test tests/conversion.test.mjs
 
 ## Documentação
 - docs/REQUIREMENTS.md: requisitos e critérios de aceite.
@@ -25,3 +25,4 @@ API, gráfico, filtros e CSV serão implementados incrementalmente.
 
 ## Protótipo
 https://www.figma.com/design/r8NQLtIt4OJN4LrsHzV0Vz/
+
