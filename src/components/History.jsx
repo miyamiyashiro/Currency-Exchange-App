@@ -1,3 +1,4 @@
+import RatesTable from './RatesTable'
 import { useState } from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import Panel from './Panel'
@@ -16,15 +17,6 @@ export default function History({ base, quote }) {
   const params = new URLSearchParams({ from, to, base, quotes: quote })
   const history = useFrankfurter(sameCurrency ? null : '/rates?' + params)
   const rows = history.data ?? []
-  const [page, setPage] = useState({ key: '', index: 0 })
-  const pageKey = base + quote + period
-  const pageIndex = page.key === pageKey ? page.index : 0
-  const pageSize = 25
-  const pageCount = Math.max(1, Math.ceil(rows.length / pageSize))
-  const safePage = Math.min(pageIndex, pageCount - 1)
-  const visibleRows = rows.slice().reverse().slice(safePage * pageSize, (safePage + 1) * pageSize)
-  const changePage = index => setPage({ key: pageKey, index })
-
   let status = null
   if (sameCurrency) status = <p>Escolha moedas diferentes no conversor para consultar o histórico.</p>
   else if (history.loading) status = <p>Carregando histórico de {base} para {quote}…</p>
@@ -48,16 +40,7 @@ export default function History({ base, quote }) {
       </div>}
       {!!rows.length && <p className={styles.caption}>{rows.length} cotações recebidas · datas efetivas de {formatDate(rows[0].date)} a {formatDate(rows.at(-1).date)}. Dias sem registros não são preenchidos.</p>}
     </Panel>
-    <Panel number="03" title="Explore os dados" subtitle="Cotações do mesmo par e período selecionados acima.">
-      <div className={styles.toolbar}><p><b>{rows.length}</b> registros encontrados</p><span>Filtros e CSV na próxima etapa</span></div>
-      {status ? <p className={styles.caption}>{sameCurrency ? 'Selecione moedas diferentes.' : history.loading ? 'Aguardando a consulta do histórico…' : history.error ? 'Histórico indisponível. Tente novamente acima.' : 'Nenhum registro para exibir.'}</p> : <>
-        <div className={styles.scroll} tabIndex="0" role="region" aria-label="Tabela de cotações, com rolagem horizontal">
-          <table><caption>{base} → {quote} · mais recentes primeiro</caption><thead><tr><th scope="col">Data</th><th scope="col">Origem</th><th scope="col">Destino</th><th scope="col">Cotação</th></tr></thead><tbody>
-            {visibleRows.map(row => <tr key={row.date}><td>{formatDate(row.date)}</td><td>{row.base}</td><td>{row.quote}</td><td>{rateFormat.format(row.rate)}</td></tr>)}
-          </tbody></table>
-        </div>
-        <nav className={styles.pagination} aria-label="Paginação das cotações"><button disabled={safePage === 0} onClick={() => changePage(safePage - 1)}>Anterior</button><span>Página {safePage + 1} de {pageCount}</span><button disabled={safePage + 1 >= pageCount} onClick={() => changePage(safePage + 1)}>Próxima</button></nav>
-      </>}
-    </Panel>
+    <RatesTable key={base + quote + period} rows={rows} base={base} quote={quote}
+      unavailable={sameCurrency ? 'Selecione moedas diferentes.' : history.loading ? 'Aguardando a consulta do histórico…' : history.error ? 'Histórico indisponível. Tente novamente acima.' : !rows.length ? 'Não há cotações disponíveis neste período.' : ''} />
   </>
 }

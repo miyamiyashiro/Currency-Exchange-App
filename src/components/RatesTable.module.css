@@ -1,0 +1,22 @@
+.filters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) auto; gap: 12px; align-items: end; }
+.filters label { display: grid; gap: 8px; font-size: 11px; font-weight: 600; min-width: 0; }
+.filters input { width: 100%; min-width: 0; height: 42px; border: 1px solid #decee8; border-radius: 9px; padding: 8px; background: #fcf9fe; color: #493353; }
+.filters button, .toolbar button, .pagination button, .empty button { padding: 10px 14px; border: 1px solid #dfcde9; border-radius: 10px; background: #f5ecfa; color: #624475; font-size: 12px; cursor: pointer; }
+.toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 22px 0 16px; font-size: 12px; color: #73607f; }
+.toolbar p { margin: 0; }
+.toolbar button { background: #743a96; color: white; }
+.toolbar button:disabled, .pagination button:disabled { opacity: .5; }
+.error { background: #fff0f2; color: #922443; border-radius: 10px; padding: 12px; font-size: 13px; }
+.caption { color: #73607f; font-size: 12px; line-height: 1.6; margin: 12px 0 0; }
+.empty { padding: 28px; text-align: center; background: #faf6fc; color: #73607f; border-radius: 12px; font-size: 14px; }
+.scroll { overflow-x: auto; }
+.scroll table { border-collapse: collapse; width: 100%; min-width: 430px; text-align: left; font-size: 12px; }
+.scroll th { background: #faf6fc; color: #624475; font-weight: 600; }
+.scroll th, .scroll td { padding: 14px; border-bottom: 1px solid #eee5f2; }
+.scroll th:last-child, .scroll td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+.scroll caption { text-align: left; padding-bottom: 14px; color: #73607f; }
+.scroll th button { border: 0; background: transparent; font: inherit; color: inherit; padding: 5px 0; cursor: pointer; }
+.pagination { display: flex; align-items: center; justify-content: flex-end; gap: 12px; margin-top: 18px; font-size: 12px; }
+@media (max-width: 800px) { .filters { grid-template-columns: 1fr 1fr; } .filters > button { grid-column: 1 / -1; } }
+@media (max-width: 600px) { .pagination { justify-content: center; } }
+@media (max-width: 400px) { .filters { grid-template-columns: 1fr; } .toolbar { flex-wrap: wrap; } }

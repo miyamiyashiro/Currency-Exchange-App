@@ -56,3 +56,10 @@ Login, cadastro, backend próprio, banco de dados, pagamentos e transações rea
 - Collection do Postman com investigação de moedas, taxa, histórico, erros e datas sem cotação.
 
 Prazo: 27/10/2026 às 23h59, horário de Brasília.
+
+## Atualização — 19/10/2026
+Conversor, histórico, gráfico, tabela, filtros, ordenação e CSV implementados.
+Filtros inválidos preservam a última seleção válida e bloqueiam exportação.
+Limpar filtros mantém a ordenação; mudar par ou período reinicia os filtros e a página.
+O CSV contém todos os resultados filtrados, incluindo páginas não visíveis.
+Revisão final de responsividade, documentação de entrega e envio ao GitHub continuam pendentes.

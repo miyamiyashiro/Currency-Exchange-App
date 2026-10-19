@@ -16,7 +16,7 @@ npm run lint
 ## Etapa atual
 Interface estática inspirada no Figma, com CSS Modules e layout adaptado ao celular.
 O conversor consulta moedas e taxas reais, valida valores e permite inverter o par. Histórico e tabela consultam o mesmo par e período, com gráfico Recharts e paginação de 25 registros.
-Filtros, ordenação interativa e CSV serão implementados na próxima etapa. Testes: node --test tests/*.test.mjs
+A tabela permite combinar filtros por datas e cotações, ordenar e exportar todos os registros filtrados em CSV. Testes: node --test tests/*.test.mjs
 
 ## Documentação
 - docs/REQUIREMENTS.md: requisitos e critérios de aceite.
