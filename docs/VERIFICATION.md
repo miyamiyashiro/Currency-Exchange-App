@@ -31,8 +31,8 @@ A collection guarda as requisições; não contém exemplos de respostas salvos.
   acessível ao navegador de teste nesta sessão. CSS responsivo não substitui essa verificação.
 
 ## Roteiro de teste manual pendente
-- [ ] Abrir o app em 390px e 320px; conferir cabeçalho, conversor, gráfico, filtros e tabela.
-- [ ] Confirmar que somente a tabela rola horizontalmente, sem transbordamento da página.
+- [x] App conferido em 390px e 320px: conversor, gráfico, filtros e tabela.
+- [x] Apenas a tabela rola horizontalmente; em 320px, clientWidth e scrollWidth da página ficaram iguais (305px úteis, descontada a barra vertical).
 - [ ] Percorrer campos e botões com Tab; verificar foco visível e link Pular para o conteúdo.
 - [ ] Testar erro de rede e Tentar novamente após restabelecer a conexão.
 - [ ] Trocar rapidamente moedas e períodos; conferir que a última seleção prevalece.
@@ -49,3 +49,6 @@ A collection guarda as requisições; não contém exemplos de respostas salvos.
 - [ ] Entregar os links e arquivos solicitados até 27/10/2026, 23h59, horário de Brasília.
 
 Não há publicação de site hospedado configurada. O README permite executar localmente.
+
+
+Teste mobile adicional: filtro sem correspondências e exportação desabilitada conferidos. Região da tabela recebeu foco visível e respondeu à seta direita do teclado. Demais testes de teclado e rede continuam no checklist.
