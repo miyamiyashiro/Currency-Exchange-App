@@ -20,3 +20,8 @@
 @media (max-width: 800px) { .filters { grid-template-columns: 1fr 1fr; } .filters > button { grid-column: 1 / -1; } }
 @media (max-width: 600px) { .pagination { justify-content: center; } }
 @media (max-width: 400px) { .filters { grid-template-columns: 1fr; } .toolbar { flex-wrap: wrap; } }
+
+@media (max-width: 600px) {
+  .filters input { font-size: 16px; min-height: 44px; }
+  .filters button, .toolbar button, .pagination button, .empty button, .scroll th button { min-height: 44px; }
+}

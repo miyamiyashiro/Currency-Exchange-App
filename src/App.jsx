@@ -5,7 +5,7 @@ import styles from './App.module.css'
 
 export default function App() {
   const [pair, setPair] = useState({ base: 'EUR', quote: 'USD' })
-  return <div>
+  return <div><a className={styles.skipLink} href="#inicio">Pular para o conteúdo</a>
     <header className={styles.header}><a className={styles.brand} href="#inicio"><span aria-hidden="true">⇄</span>Currency Exchange <small>APP</small></a><span className={styles.badge}>Projeto de estudos · React</span></header>
     <main id="inicio" className={styles.main}>
       <div className={styles.intro}><p className={styles.eyebrow}>UM NOVO OLHAR SOBRE O CÂMBIO</p><h1>Moedas diferentes.<br /><em>Possibilidades sem fronteiras.</em></h1><p>Converta valores e explore a evolução das moedas em um só lugar.</p></div>

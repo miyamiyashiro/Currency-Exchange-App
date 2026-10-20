@@ -60,3 +60,7 @@
   .periods { display: grid; grid-template-columns: repeat(4, 1fr); } .periods button { padding: 9px 4px; font-size: 11px; }
 }
 @media (max-width: 400px) { .filters { grid-template-columns: 1fr; } }
+
+.skipLink { position: fixed; top: 8px; left: 8px; transform: translateY(-150%); background: #632d83; color: white; padding: 12px 18px; border-radius: 8px; z-index: 100; }
+.skipLink:focus { transform: translateY(0); }
+@media (max-width: 360px) { .brand { font-size: 14px; gap: 7px; } .brand small { letter-spacing: 1px; } }

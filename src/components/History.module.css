@@ -19,3 +19,5 @@
 @media (max-width: 600px) { .periods { display: grid; grid-template-columns: repeat(4, 1fr); } .periods button { padding: 9px 4px; font-size: 11px; } .chart { height: 250px; } .pagination { justify-content: center; } }
 
 .periods .selected:hover { background: #643080; color: white; }
+
+@media (max-width: 600px) { .periods button, .status button { min-height: 44px; } }
