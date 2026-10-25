@@ -7,7 +7,7 @@ Fonte: https://deluxe-blue-bc1.notion.site/Projeto-01-Currency-Exchange-App-3e4d
 ## Contexto, público e objetivo
 Centralizar consultas de câmbio para viajantes, estudantes e interessados em moedas. Permitir conversão de valores, análise histórica e exportação dos dados.
 
-## Escopo funcional
+## Requisitos funcionais e escopo
 - Selecionar origem e destino entre moedas da API Frankfurter.
 - Informar valor, validar entradas, converter e inverter moedas.
 - Mostrar taxa e data efetiva retornadas pela API.
@@ -19,7 +19,7 @@ Centralizar consultas de câmbio para viajantes, estudantes e interessados em mo
 - Exportar dados filtrados em CSV com cabeçalhos e nome identificável; bloquear exportação vazia.
 - Mostrar carregamento, erro e ausência de dados.
 
-## Restrições e qualidade
+## Requisitos não funcionais e restrições
 React + JavaScript, JSX, Vite, props, useState, lifting state up, useEffect, hooks customizados, fetch com async/await, CSS Modules e biblioteca de gráficos. Interface desktop e mobile com campos rotulados, navegação por teclado e mensagens claras. Respostas antigas não devem substituir a seleção atual.
 
 ## Fora do escopo
@@ -62,4 +62,4 @@ Conversor, histórico, gráfico, tabela, filtros, ordenação e CSV implementado
 Filtros inválidos preservam a última seleção válida e bloqueiam exportação.
 Limpar filtros mantém a ordenação; mudar par ou período reinicia os filtros e a página.
 O CSV contém todos os resultados filtrados, incluindo páginas não visíveis.
-Revisão final de responsividade, documentação de entrega e envio ao GitHub continuam pendentes.
+Revisão final registrada em docs/VERIFICATION.md, em 25/10/2026. Documentação obrigatória e imagens acrescentadas; o commit da revisão deve ser enviado ao GitHub antes da entrega.

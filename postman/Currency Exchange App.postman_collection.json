@@ -36,7 +36,7 @@
             "currencies"
           ]
         },
-        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+        "description": "Lista moedas disponíveis e seus códigos ISO. Verificar HTTP 200 e array de objetos com iso_code e name."
       },
       "response": []
     },
@@ -71,7 +71,7 @@
             "USD"
           ]
         },
-        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+        "description": "Consulta a taxa EUR/USD para uma unidade de EUR. Verificar date, base, quote e rate; a aplicação multiplica o valor pela taxa."
       },
       "response": []
     },
@@ -174,6 +174,58 @@
           ]
         }
       },
+      "response": []
+    },
+    {
+      "name": "Histórico — intervalo sem dados",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.frankfurter.dev/v2/rates?from=2024-05-01&to=2024-05-02&base=EUR&quotes=XCG",
+          "protocol": "https",
+          "host": [
+            "api",
+            "frankfurter",
+            "dev"
+          ],
+          "path": [
+            "v2",
+            "rates"
+          ],
+          "query": [
+            {
+              "key": "from",
+              "value": "2024-05-01"
+            },
+            {
+              "key": "to",
+              "value": "2024-05-02"
+            },
+            {
+              "key": "base",
+              "value": "EUR"
+            },
+            {
+              "key": "quotes",
+              "value": "XCG"
+            }
+          ]
+        },
+        "description": "Verificado por requisição HTTP direta em 25/10/2026: status 200 e []. Incluído para reprodução no Postman; não executado pelo Collection Runner."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Histórico sem registros\", function () { pm.expect(pm.response.json()).to.eql([]); });"
+            ]
+          }
+        }
+      ],
       "response": []
     }
   ]

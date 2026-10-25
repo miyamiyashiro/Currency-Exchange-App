@@ -1,57 +1,41 @@
 # Componentes e fluxo de dados
 
-| Componente | Arquivo | Estilo | Responsabilidade / props |
-| --- | --- | --- | --- |
-| App | src/App.jsx | src/App.module.css | Guarda o par de moedas em useState e passa base, quote e onPairChange ao conversor. |
-| Panel | src/components/Panel.jsx | src/App.module.css | Cartão reutilizável; recebe number, title, subtitle e children. |
-| Converter | src/components/Converter.jsx | src/components/Converter.module.css | Guarda o valor digitado; consulta moedas e taxa; valida, converte e inverte o par por callback. |
-| History | src/components/History.jsx | src/components/History.module.css | Recebe base e quote; guarda período e paginação, consulta histórico e apresenta gráfico Recharts e tabela. |
-| RatesTable | src/components/RatesTable.jsx | src/components/RatesTable.module.css | Recebe rows, base, quote e unavailable; controla filtros digitados e aplicados, ordenação, página e aviso de exportação. |
+| Componente | Arquivo JSX | CSS Module | Props | Estados e responsabilidade |
+| --- | --- | --- | --- | --- |
+| App | src/App.jsx | src/App.module.css | Nenhuma | pair: origem/destino compartilhados por Converter e History |
+| Panel | src/components/Panel.jsx | src/App.module.css | number, title, subtitle, children | Sem estado; seção reutilizável |
+| Converter | src/components/Converter.jsx | src/components/Converter.module.css | base, quote, onPairChange | amount; consulta moedas/taxa pelo hook; valida valor, calcula resultado e inverte par por callback |
+| History | src/components/History.jsx | src/components/History.module.css | base, quote | period e today; consulta histórico, mostra estados e gráfico Recharts; fornece rows para RatesTable |
+| RatesTable | src/components/RatesTable.jsx | src/components/RatesTable.module.css | rows, base, quote, unavailable | draft, applied, sort, page, exportMessage; filtros, ordenação, paginação e CSV |
+
+## Relações
+
+App → Converter → onPairChange → App → History → RatesTable.
+Converter e History reutilizam useFrankfurter. Todos os painéis usam Panel.
+O par compartilhado em App exemplifica lifting state up: uma mudança no conversor
+atualiza também o histórico, sem duplicar esse estado.
 
 ## Hook e serviço
-useFrankfurter usa useEffect para consultar a API quando o caminho ou a tentativa muda.
-Expõe data, loading, error e retry. Cancela requisições na limpeza do efeito e ignora respostas antigas.
-O timeout é de 15 segundos. Resultados só aparecem para o caminho e tentativa correspondentes.
-fetchResource usa fetch com async/await, verifica HTTP e valida os dados essenciais.
 
-## Conversão
-A aplicação multiplica o valor pela taxa, sem arredondar antes da apresentação.
-Intl.NumberFormat formata em pt-BR respeitando a moeda; a data recebida é apresentada sem conversão de fuso.
-Valores vazios, não finitos ou menores ou iguais a zero e moedas iguais são bloqueados.
-O par fica em App (lifting state up), preparado para ser compartilhado com o histórico na próxima etapa.
+src/hooks/useFrankfurter.js usa useEffect, AbortController e timeout de 15 segundos.
+Guarda response e attempt; expõe data, loading, error e retry. A limpeza cancela
+a consulta e respostas antigas são ignoradas. A resposta precisa corresponder
+ao caminho e à tentativa atuais.
 
-## Verificação desta etapa
-Build e ESLint aprovados.
-Quatro testes Node cobrem cálculo, entradas inválidas, overflow, erro HTTP, resposta de par incorreto e lista de moedas.
-No navegador, consulta real, validação de zero e inversão preservando o valor foram conferidas.
+src/services/frankfurter.js centraliza fetch com async/await, verifica HTTP e
+valida o formato essencial. Sem chave, backend próprio ou persistência.
 
-## Etapa de histórico e gráfico
-Os oito períodos são calculados em src/utils/history.js. Dias incluem hoje; meses e anos
-respeitam o calendário e ajustam o dia para o final do mês quando necessário.
-A consulta /rates usa from, to, base e quotes. A resposta é validada, deduplicada por data,
-limitada ao intervalo e ordenada cronologicamente. Nenhum dia ausente é preenchido.
-History usa o mesmo hook de consultas canceláveis e oferece carregamento, erro com nova
-tentativa e ausência de dados. Gráfico e tabela usam a mesma lista.
-Ao mudar o par ou período, a paginação retorna à primeira página.
-A data final é capturada na abertura da tela; recarregue a página para atualizar após a virada do dia.
+## Funções e regras
 
-Verificação: oito testes automatizados, ESLint e build aprovados. Navegador conferido
-com 7, 30 dias e 10 anos, inversão de moedas e paginação. Dez anos retornaram 3.653 registros
-no par testado. O build informa bundle acima de 500 kB por incluir a biblioteca de gráficos;
-a aplicação compila normalmente. Otimização de carregamento fica para o acabamento.
+- conversion.js: valida valor positivo finito, multiplica pela taxa e formata
+  moeda/data. Overflow é tratado; moedas iguais são bloqueadas na interface.
+- history.js: oito períodos, com ajuste de fim de mês/bissexto; valida, deduplica,
+  limita ao intervalo e ordena os registros. Não inventa dias sem dados.
+- table.js: filtros inclusivos combinados, ordenação numérica e CSV com BOM UTF-8,
+  CRLF, cabeçalho, datas ISO e taxa sem arredondar.
 
-## Filtros, ordenação e exportação
-RatesTable recebe os dados de History. A key depende do par e período: ao mudar a consulta,
-o React reinicia os filtros e a página. O gráfico continua usando todos os registros do período.
-Filtros válidos são aplicados ao editar. Intervalos inválidos exibem mensagem e preservam
-os últimos filtros válidos; a exportação fica desabilitada até corrigir.
-Limpar filtros preserva a ordenação e volta à primeira página.
-A ordenação por cotação é numérica, com data como desempate; ordenar não modifica os dados originais.
-A exportação usa toda a lista filtrada e ordenada antes da paginação.
-O CSV contém cabeçalho, UTF-8 com BOM, linhas CRLF, datas ISO e taxas sem arredondamento.
-O nome inclui par e primeira/última data exportadas. A geração ocorre no navegador com Blob.
-Arquivo vazio, erro de filtro ou consulta indisponível impedem exportação.
-
-Verificação: 12 testes, lint e build aprovados. Teste real no navegador combinou data
-inicial e cotação mínima, ordenou quatro resultados e baixou CSV com essas mesmas quatro
-linhas na ordem correta. Filtro sem correspondências desabilitou o botão de exportação.
+History captura a data final ao abrir a tela; recarregue após a virada do dia.
+RatesTable recebe key baseada em par/período: uma mudança reinicia filtros e página.
+Filtros inválidos preservam os últimos válidos e bloqueiam exportação.
+Limpar filtros preserva a ordenação. O gráfico mantém o período completo.
+CSV usa toda a lista filtrada e ordenada antes da paginação de 25 linhas.

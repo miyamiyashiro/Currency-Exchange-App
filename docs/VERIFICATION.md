@@ -1,54 +1,58 @@
 # Verificação e entrega
 
-## Verificações realizadas
-- Build e ESLint executados nas etapas de desenvolvimento.
-- 12 testes automatizados: cálculo, entradas inválidas, overflow, HTTP de erro,
-  par incorreto, moedas, datas de períodos, bissextos, histórico inválido, filtros,
-  ordenação numérica e exportação com mais de uma página.
-- Navegador: conversão real, zero inválido, inversão preservando valor.
-- Navegador: histórico de 7 e 30 dias e 10 anos; troca de par e paginação.
-- Navegador: data inicial com cotação mínima, ordenação e quatro linhas exportadas.
-- CSV baixado e lido: cabeçalho, quantidade, precisão e ordem conferidos.
-- Filtro sem correspondências: mensagem e exportação desabilitada.
+## Revisão final — 25/10/2026
 
-## Postman — observações da investigação
-A collection contém cinco requisições:
-1. Moedas disponíveis — resposta 200 e lista de moedas.
-2. Cotação EUR para USD — resposta 200 com date, base, quote e rate.
-3. Histórico EUR para USD — resposta 200 e lista de registros.
-4. Moeda INVALID — resposta 422 com mensagem de moeda inválida.
-5. Fim de semana 04–05/05/2024 — resposta 200 com registros para as duas datas.
-O teste de fim de semana não demonstrou ausência de dados. Não se infere dele que
-toda data terá cotação ou que todo fim de semana retornará vazio.
-Os resultados acima foram observados nos prints enviados durante o desenvolvimento.
-A collection guarda as requisições; não contém exemplos de respostas salvos.
+Enunciado completo, incluindo seções 9–12, conferido no Notion.
+Foram acrescentados FIGMA.md, API_TESTS.md, FUNCTION_TESTS.md, AI_USAGE.md e
+imagens reais da aplicação e dos protótipos, que faltavam na documentação.
 
-## Revisão em 20/10/2026
-- Adicionado atalho de teclado para pular ao conteúdo.
-- Campos mobile com fonte de 16px e principais botões com altura mínima de 44px.
-- README atualizado para o comportamento funcional e comando npm test.
-- Revisão visual mobile ainda pendente: o servidor iniciado pelo agente não ficou
-  acessível ao navegador de teste nesta sessão. CSS responsivo não substitui essa verificação.
+| Verificação | Evidência / resultado |
+| --- | --- |
+| Testes de funções | 12 aprovados, 0 falhas; detalhes em FUNCTION_TESTS.md |
+| ESLint | Sem erros |
+| Build | Concluído; aviso não impeditivo de bundle ~589 kB |
+| Instalação limpa | Cópia do commit e3fcfb5 sem node_modules; npm ci instalou 182 pacotes e build passou |
+| Conversão | Dados reais EUR/USD, valor 100; taxa e data da resposta exibidas |
+| Oito períodos | 7, 15, 30 dias, 3, 6 meses, 1, 5 e 10 anos carregados com gráfico e tabela |
+| Contagem observada EUR/USD | 7, 15, 30, 93, 184, 366, 1827 e 3653 registros, respectivamente |
+| Troca rápida | Destino BRL → USD e período 7 dias: resultado final EUR/USD e 7 registros |
+| Filtros combinados | 22–24/10/2026 e taxa 1,122–1,124: duas linhas, 22 e 23/10 |
+| Ausência por filtro | Mínimo 99: mensagem sem registros e CSV desabilitado |
+| Mobile | Nova captura em 390px; largura do documento igual à viewport, sem overflow da página |
+| Figma | Link abriu sem login; desktop, wireframe cinza, mobile e estados visíveis |
+| GitHub | Público; 7 commits de desenvolvimento visíveis antes desta revisão |
 
-## Roteiro de teste manual pendente
-- [x] App conferido em 390px e 320px: conversor, gráfico, filtros e tabela.
-- [x] Apenas a tabela rola horizontalmente; em 320px, clientWidth e scrollWidth da página ficaram iguais (305px úteis, descontada a barra vertical).
-- [ ] Percorrer campos e botões com Tab; verificar foco visível e link Pular para o conteúdo.
-- [ ] Testar erro de rede e Tentar novamente após restabelecer a conexão.
-- [ ] Trocar rapidamente moedas e períodos; conferir que a última seleção prevalece.
-- [ ] Abrir o CSV no programa de planilha escolhido e importar com separador vírgula.
-- [ ] Conferir no Figma wireframe, média fidelidade, mobile e estados.
+A instalação limpa usou npm ci com acesso ao registro; a tentativa offline inicial
+não tinha todos os pacotes em cache e não foi considerada aprovação.
+
+## Verificações anteriores preservadas
+
+- Inversão preservando valor, zero inválido, paginação e ordenação.
+- CSV baixado e lido: cabeçalho, quantidade, precisão e ordem conferidos;
+  teste real com quatro registros filtrados.
+- Layout em 320px e 390px; somente a tabela rola horizontalmente.
+- Região da tabela recebeu foco visível e respondeu à seta direita.
+- Erro HTTP 422 observado no Postman e tradução do serviço coberta por teste.
+
+## Limites da revisão
+
+Não foram concluídos teste manual de desconexão/reconexão com retry, percurso
+integral por teclado ou abertura do CSV em Excel/LibreOffice. Os mecanismos de
+erro/retry foram revisados no código; isso não equivale a um teste end-to-end.
+A resposta histórica vazia foi verificada por HTTP em 25/10 (ver API_TESTS.md),
+e sua normalização é coberta por teste. Não houve simulação da tela vazia da API
+no navegador; o estado vazio provocado pelos filtros foi verificado.
 
 ## Entrega
-- [x] Código e documentação no repositório local.
-- [x] Collection do Postman em formato v2.1.
-- [x] Histórico local de commits por etapa.
-- [ ] Enviar os commits ao GitHub e conferir acesso público.
-- [ ] Conferir o link público do Figma com o arquivo final.
-- [ ] Finalizar os testes manuais acima.
-- [ ] Entregar os links e arquivos solicitados até 27/10/2026, 23h59, horário de Brasília.
 
-Não há publicação de site hospedado configurada. O README permite executar localmente.
+- [x] Código, collection, requisitos e documentos obrigatórios presentes.
+- [x] Evidências da aplicação desktop/mobile e Figma no repositório.
+- [x] GitHub público e histórico incremental anterior confirmado.
+- [x] Figma acessível sem login.
+- [ ] Enviar ao GitHub o commit desta revisão final.
+- [ ] Aluna revisar AI_USAGE.md e preparar explicação do funcionamento.
+- [ ] Conferir/mover os cartões do próprio board conforme evolução.
+- [ ] Entregar GitHub, Figma e collection até 27/10/2026, 23h59 BRT.
 
-
-Teste mobile adicional: filtro sem correspondências e exportação desabilitada conferidos. Região da tabela recebeu foco visível e respondeu à seta direita do teclado. Demais testes de teclado e rede continuam no checklist.
+O enunciado exige aplicação executável; não exige explicitamente hospedagem.
+Não há site hospedado configurado. O README documenta a execução local.

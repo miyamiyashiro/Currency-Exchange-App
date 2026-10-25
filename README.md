@@ -67,11 +67,11 @@ A disponibilidade dos dados depende da API e da moeda selecionada.
 - src/utils/: datas, conversão, filtros, ordenação e CSV.
 - tests/: testes de regras e validação de dados.
 - docs/: requisitos, componentes, verificação e roteiro de apresentação.
-- postman/: collection v2.1 exportada, com cinco consultas.
+- postman/: collection v2.1 exportada, com seis consultas.
 
 ## Postman
 Importe postman/Currency Exchange App.postman_collection.json pelo comando Import.
-As consultas incluem moedas, cotação, histórico, moeda inválida e fim de semana.
+As consultas incluem moedas, cotação, histórico, moeda inválida, fim de semana e intervalo sem dados.
 O caso de moeda inválida deve retornar erro; não deve ser corrigido para uma moeda válida.
 Consulte docs/VERIFICATION.md para os resultados observados e pendências.
 
@@ -83,3 +83,16 @@ Consulte docs/VERIFICATION.md para os resultados observados e pendências.
 - [Roteiro de apresentação](docs/PRESENTATION.md)
 
 A entrega requer que o link do Figma permita a visualização pelo professor.
+
+## Evidências da aplicação
+
+![Aplicação desktop](docs/images/app-desktop.png)
+
+[Ver captura mobile](docs/images/app-mobile.png).
+
+## Documentação complementar obrigatória
+
+- [Figma e evidências](docs/FIGMA.md)
+- [Investigação e testes da API](docs/API_TESTS.md)
+- [Testes das funções JavaScript](docs/FUNCTION_TESTS.md)
+- [Registro de uso de IA](docs/AI_USAGE.md)
