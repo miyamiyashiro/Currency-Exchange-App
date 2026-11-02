@@ -56,3 +56,11 @@ no navegador; o estado vazio provocado pelos filtros foi verificado.
 
 O enunciado exige aplicação executável; não exige explicitamente hospedagem.
 Não há site hospedado configurado. O README documenta a execução local.
+
+## Seletor de idioma — 02/11/2026
+- 15 testes aprovados (12 anteriores + 3 de idioma, formatação, CSV e preferência).
+- ESLint e build aprovados; permanece o aviso de tamanho do bundle.
+- Navegador: PT → EN → PT preservou valor 250 e filtro mínimo 1.
+- Valor zero mostrou validação em inglês; recarregar manteve o idioma inglês.
+- Layout em 320px: cabeçalho e seletor visíveis, sem rolagem horizontal da página
+  (larguras clientWidth e scrollWidth de 305px úteis).

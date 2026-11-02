@@ -25,16 +25,16 @@ export function filterAndSort(rows, filters, sort) {
   })
 }
 
-export function createCsv(rows) {
+export function createCsv(rows, language = 'pt') {
   if (!rows.length) throw new Error('Não há registros para exportar.')
   const escape = value => '"' + String(value).replaceAll('"', '""') + '"'
-  const header = ['data', 'moeda_origem', 'moeda_destino', 'cotacao']
+  const header = language === 'en' ? ['date', 'source_currency', 'target_currency', 'rate'] : ['data', 'moeda_origem', 'moeda_destino', 'cotacao']
   return '\uFEFF' + [header.join(','), ...rows.map(row =>
     [row.date, row.base, row.quote, row.rate].map(escape).join(',')
   )].join('\r\n') + '\r\n'
 }
 
-export function csvFilename(rows) {
+export function csvFilename(rows, language = 'pt') {
   const dates = rows.map(row => row.date).sort()
-  return 'cotacoes_' + rows[0].base + '_' + rows[0].quote + '_' + dates[0] + '_' + dates.at(-1) + '.csv'
+  return (language === 'en' ? 'rates_' : 'cotacoes_') + rows[0].base + '_' + rows[0].quote + '_' + dates[0] + '_' + dates.at(-1) + '.csv'
 }

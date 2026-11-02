@@ -64,3 +64,10 @@
 .skipLink { position: fixed; top: 8px; left: 8px; transform: translateY(-150%); background: #632d83; color: white; padding: 12px 18px; border-radius: 8px; z-index: 100; }
 .skipLink:focus { transform: translateY(0); }
 @media (max-width: 360px) { .brand { font-size: 14px; gap: 7px; } .brand small { letter-spacing: 1px; } }
+
+.header { flex-wrap: wrap; }
+.headerActions { display: flex; align-items: center; gap: 16px; }
+.language { display: flex; border: 1px solid #ddcce7; border-radius: 12px; padding: 3px; background: #fff; }
+.language button { border: 0; border-radius: 9px; min-width: 44px; min-height: 44px; background: transparent; color: #632d83; cursor: pointer; font-size: 13px; font-weight: 600; }
+.language button[aria-pressed="true"] { background: #743a96; color: white; }
+@media (max-width: 600px) { .header { gap: 12px; } .headerActions { margin-left: auto; } }

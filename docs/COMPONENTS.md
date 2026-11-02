@@ -39,3 +39,11 @@ RatesTable recebe key baseada em par/período: uma mudança reinicia filtros e p
 Filtros inválidos preservam os últimos válidos e bloqueiam exportação.
 Limpar filtros preserva a ordenação. O gráfico mantém o período completo.
 CSV usa toda a lista filtrada e ordenada antes da paginação de 25 linhas.
+
+## Atualização de idiomas — 02/11/2026
+App também guarda language, inicializado pela preferência local, e passa essa prop
+para Converter e History; History repassa para RatesTable. src/i18n.js centraliza
+as traduções e interpolação de parâmetros. useEffect atualiza o lang do documento
+e a preferência local. A troca não muda as chaves dos componentes nem o caminho
+da API, preservando os estados atuais. Erros são traduzidos na apresentação,
+portanto também mudam de idioma quando já estão visíveis.

@@ -96,3 +96,12 @@ A entrega requer que o link do Figma permita a visualização pelo professor.
 - [Investigação e testes da API](docs/API_TESTS.md)
 - [Testes das funções JavaScript](docs/FUNCTION_TESTS.md)
 - [Registro de uso de IA](docs/AI_USAGE.md)
+## Idiomas
+O seletor PT / EN no cabeçalho alterna português e inglês. A preferência é salva
+no navegador quando o armazenamento está disponível. A troca mantém moedas,
+valor, período, filtros, ordenação e página atuais. Somente o idioma é persistido
+entre visitas; os demais campos voltam ao padrão ao recarregar.
+Textos, mensagens, nomes de moedas reconhecidos pelo navegador, números, datas
+e cabeçalhos do CSV acompanham o idioma. Datas e taxas dentro do CSV mantêm ISO
+e ponto decimal para importação consistente. Controles nativos de data/número
+podem seguir as preferências do navegador/sistema.
