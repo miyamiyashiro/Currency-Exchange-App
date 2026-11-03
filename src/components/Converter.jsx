@@ -25,7 +25,7 @@ export default function Converter({ base, quote, onPairChange, language = 'pt' }
     return currencies.data.map(currency => <option key={currency.iso_code} value={currency.iso_code}>{currency.iso_code} — {(currencyNames.of(currency.iso_code) || currency.name)}</option>)
   }
 
-  return <Panel number="01" title={t("Conversor de moedas")} subtitle={t("De uma moeda para outra, de um jeito simples.")}>
+  return <Panel id="conversor" number="01" title={t("Conversor de moedas")} subtitle={t("De uma moeda para outra, de um jeito simples.")}>
     <div className={styles.fields}>
       <label>{t("Valor")}<input type="number" step="any" min="0" value={amount} onChange={event => setAmount(event.target.value)} aria-invalid={Boolean(amountError)} aria-describedby={amountError ? 'amount-error' : undefined} /></label>
       <label>{t("De")}<select value={base} disabled={!currencies.data?.length} onChange={event => onPairChange({ base: event.target.value, quote })}>{options(base)}</select></label>

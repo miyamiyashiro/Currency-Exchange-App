@@ -1,4 +1,7 @@
 export const english = {
+  "Navegação principal": "Main navigation",
+  "Conversor": "Converter",
+  "Dados": "Data",
   "Pular para o conteúdo": "Skip to content",
   "Projeto de estudos · React": "Study project · React",
   "UM NOVO OLHAR SOBRE O CÂMBIO": "A NEW PERSPECTIVE ON EXCHANGE RATES",

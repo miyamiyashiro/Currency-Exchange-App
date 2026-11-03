@@ -27,7 +27,7 @@ export default function History({ base, quote, language = 'pt' }) {
   else if (history.data && !rows.length) status = <p>{t("Não há cotações disponíveis neste período. Experimente outro intervalo.")}</p>
 
   return <>
-    <Panel number="02" title={t("Evolução da cotação")} subtitle={t('Histórico') + ' ' + base + ' → ' + quote}>
+    <Panel id="historico" number="02" title={t("Evolução da cotação")} subtitle={t('Histórico') + ' ' + base + ' → ' + quote}>
       <div className={styles.periods} aria-label={t("Período do histórico")}>{periods.map(item => <button key={item.id} aria-pressed={period === item.id} className={period === item.id ? styles.selected : ''} onClick={() => setPeriod(item.id)}>{t(item.label)}</button>)}</div>
       <p className={styles.caption}>{t('De {from} a {to} · cotação de 1 {base} em {quote}', { from: formatDate(from, locale), to: formatDate(to, locale), base, quote })}</p>
       {status ? <div className={styles.status} aria-live="polite">{status}</div> : <div className={styles.chart} role="group" aria-label={t('Gráfico de cotações {base} para {quote}. Dados completos na tabela abaixo.', { base, quote })}>

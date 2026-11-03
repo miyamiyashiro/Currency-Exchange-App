@@ -60,7 +60,7 @@ export default function RatesTable({ rows, base, quote, unavailable, language = 
   const sortLabel = field => sort.field !== field ? 'none' : sort.direction === 'asc' ? 'ascending' : 'descending'
   const arrow = field => sort.field !== field ? '↕' : sort.direction === 'asc' ? '↑' : '↓'
 
-  return <Panel number="03" title={t("Explore os dados")} subtitle={t("Os filtros abaixo afetam a tabela e o CSV. O gráfico mantém o período completo.")}>
+  return <Panel id="dados" number="03" title={t("Explore os dados")} subtitle={t("Os filtros abaixo afetam a tabela e o CSV. O gráfico mantém o período completo.")}>
     <div className={styles.filters} aria-describedby={error ? 'filter-error' : undefined}>
       <label>{t("Data inicial")}<input type="date" value={draft.from} onInput={event => changeFilter('from', event.target.value)} disabled={Boolean(unavailable)} /></label>
       <label>{t("Data final")}<input type="date" value={draft.to} onInput={event => changeFilter('to', event.target.value)} disabled={Boolean(unavailable)} /></label>
